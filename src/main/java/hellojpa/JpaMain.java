@@ -28,11 +28,18 @@ public class JpaMain {
             member.changeTeam(team);
             em.persist(member);
 
-            em.flush();
-            em.clear();
+            /*em.flush();
+            em.clear();*/
 
-            Team findTeam = em.find(Team.class, team.getId());
+            /*Team findTeam = em.find(Team.class, team.getId());
             List<Member> members = findTeam.getMembers();
+*/
+            Member member1 = new Member();
+            member1.setName("member2");
+            member1.changeTeam(team);
+            em.persist(member1);
+
+            List<Member> members = team.getMembers();
 
             for (Member m : members) {
                 System.out.println("m = " + m.getName());
