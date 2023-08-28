@@ -9,7 +9,7 @@ import java.util.List;
         sequenceName = "TEAM_SEQ",
         initialValue = 1,
         allocationSize = 50)
-public class Team {
+public class Team extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEAM_SEQ_GENERATOR")
