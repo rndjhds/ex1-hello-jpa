@@ -17,50 +17,18 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 저장
-            Team team = new Team();
-            team.setName("TeamA");
+            Movie movie = new Movie();
+            movie.setDirector("AAAA");
+            movie.setActor("BBBB");
+            movie.setName("바람과 함께 사라지다.");
+            movie.setPrice(10000);
+            em.persist(movie);
 
-            em.persist(team);
+            em.flush();
+            em.clear();
 
-            Member member = new Member();
-            member.setName("member1");
-            member.changeTeam(team);
-            em.persist(member);
-
-            /*em.flush();
-            em.clear();*/
-
-            /*Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
-*/
-            Member member1 = new Member();
-            member1.setName("member2");
-            member1.changeTeam(team);
-            em.persist(member1);
-
-            List<Member> members = team.getMembers();
-
-            for (Member m : members) {
-                System.out.println("m = " + m.getName());
-            }
-
-
-            /*Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
-            System.out.println("members = " + members);
-
-            for (Member m : members) {
-                System.out.println("m = " + m.getName());
-            }*/
-
-            // findMember의 Team을 update
-/*          Team team1 = new Team();
-            team1.setName("TeamB");
-            em.persist(team1);
-            findMember.setTeam(team1);*/
-
-
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
