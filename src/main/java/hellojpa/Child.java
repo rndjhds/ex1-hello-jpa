@@ -15,6 +15,11 @@ public class Child {
     @JoinColumn(name = "parent_id")
     private Parent parent;
 
+    public void changeParent(Parent parent) {
+        this.setParent(parent);
+        parent.getChildList().add(this);
+    }
+
     public Long getId() {
         return id;
     }
