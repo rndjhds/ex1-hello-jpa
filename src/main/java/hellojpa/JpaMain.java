@@ -17,22 +17,11 @@ public class JpaMain {
 
         try {
 
-            Parent parent = new Parent();
-
-            Child child1 = new Child();
-            Child child2 = new Child();
-            child1.changeParent(parent);
-            child2.changeParent(parent);
-
-            em.persist(parent);
-
-            em.flush();
-            em.clear();
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-            em.remove(findParent); // CasecaseType.ALL 작동으로 Child까지 삭제
-            //findParent.getChildList().remove(0); // orphanRemoval 작동
-
+            Member member = new Member();
+            member.setName("hello");
+            member.setHomeAddress(new Address("city","street","zipcode"));
+            member.setWorkPeriod(new Period());
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
