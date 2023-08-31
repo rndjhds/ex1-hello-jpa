@@ -21,18 +21,7 @@ public class JpaMain {
 
         try {
 
-            //Criteria 사용 준비
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Member> query = cb.createQuery(Member.class);
-
-            //루트 클래스 (조회를 시작할 클래스)
-            Root<Member> m = query.from(Member.class);
-
-            //쿼리 생성
-            CriteriaQuery<Member> cq =
-                    query.select(m).where(cb.equal(m.get("name"), "kim"));
-            List<Member> resultList = em.createQuery(cq).getResultList();
-
+            em.createNativeQuery("select MEMBER_ID, city, street, zipcode, username from MEMBER").getResultList();
 
             tx.commit();
         } catch (Exception e) {
