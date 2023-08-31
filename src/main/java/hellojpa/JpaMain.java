@@ -4,9 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class JpaMain {
@@ -21,7 +18,14 @@ public class JpaMain {
 
         try {
 
-            em.createNativeQuery("select MEMBER_ID, city, street, zipcode, username from MEMBER").getResultList();
+            Member member = new Member();
+            member.setName("member1");
+            em.persist(member);
+
+            List<Member> result = em.createNativeQuery("select MEMBER_ID, city, street, zipcode, username from MEMBER", Member.class).getResultList();
+            for (Member m : result) {
+                System.out.println("member = " + m.getName());
+            }
 
             tx.commit();
         } catch (Exception e) {
